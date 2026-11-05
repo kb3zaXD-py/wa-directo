@@ -1,0 +1,10 @@
+[{
+  "relation": ["delegate_permission/common.handle_all_urls"],
+  "target": {
+    "namespace": "android_app",
+    "package_name": "com.whatsappdirecto.app",
+    "sha256_cert_fingerprints": [
+      "8E:DC:A7:93:AD:83:AB:43:4F:C2:77:8C:95:03:03:D8:FB:9A:D7:5A:0B:AD:70:A1:33:AD:1F:A9:43:4C:49:D2"
+    ]
+  }
+}]
