@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+<title>Escribanía Segovia</title>
+
+<meta name="theme-color" content="#6A1B9A">
+<meta name="description" content="Abrir conversaciones WhatsApp rápidamente">
+
+<link rel="manifest" href="manifest.json">
+<link rel="icon" href="icon-192.png">
+
+<style>
+
+:root{
+    --morado:#6A1B9A;
+    --verde:#25D366;
+    --gris:#f5f5f5;
+}
+
+*{
+    box-sizing:border-box;
+}
+
+body{
+    margin:0;
+    padding:20px;
+    background:var(--gris);
+    font-family:Arial,sans-serif;
+}
+
+.container{
+    max-width:500px;
+    margin:auto;
+    background:white;
+    padding:25px;
+    border-radius:16px;
+    box-shadow:0 4px 15px rgba(0,0,0,.1);
+}
+
+h1{
+    text-align:center;
+    color:var(--morado);
+    margin-top:0;
+}
+
+label{
+    display:block;
+    margin-top:18px;
+    margin-bottom:8px;
+    font-weight:bold;
+}
+
+select,
+input{
+    width:100%;
+    padding:15px;
+    font-size:18px;
+    border:1px solid #ccc;
+    border-radius:10px;
+}
+
+button{
+    width:100%;
+    margin-top:25px;
+    padding:16px;
+    font-size:20px;
+    border:none;
+    border-radius:10px;
+    background:var(--verde);
+    color:white;
+    font-weight:bold;
+    cursor:pointer;
+}
+
+button:active{
+    transform:scale(.98);
+}
+
+.preview{
+    margin-top:15px;
+    color:#444;
+    font-weight:bold;
+}
+
+.error{
+    margin-top:10px;
+    color:red;
+    font-weight:bold;
+}
+
+.info{
+    margin-top:20px;
+    font-size:14px;
+    color:#666;
+}
+
+.footer{
+    margin-top:20px;
+    text-align:center;
+    color:#777;
+    font-size:13px;
+}
+
+</style>
+
+</head>
+
+<body>
+
+<div class="container">
+
+<h1>Escribanía Segovia</h1>
+
+<label>País</label>
+
+<select id="pais">
+    <option value="595" selected>🇵🇾 Paraguay (+595)</option>
+    <option value="54">🇦🇷 Argentina (+54)</option>
+    <option value="55">🇧🇷 Brasil (+55)</option>
+    <option value="598">🇺🇾 Uruguay (+598)</option>
+    <option value="591">🇧🇴 Bolivia (+591)</option>
+    <option value="56">🇨🇱 Chile (+56)</option>
+    <option value="57">🇨🇴 Colombia (+57)</option>
+    <option value="51">🇵🇪 Perú (+51)</option>
+    <option value="52">🇲🇽 México (+52)</option>
+    <option value="1">🇺🇸 Estados Unidos (+1)</option>
+</select>
+
+<label>Número</label>
+
+<input
+    type="tel"
+    id="numero"
+    inputmode="numeric"
+    placeholder="981123456"
+    autocomplete="off">
+
+<div id="preview" class="preview"></div>
+
+<div id="error" class="error"></div>
+
+<button id="btnWhatsapp">
+    Abrir WhatsApp
+</button>
+
+<div class="info">
+    Puede pegar números completos como:
+    +595981123456,
+    0981123456,
+    981123456.
+</div>
+
+<div class="footer">
+    Escribanía Segovia
+</div>
+
+</div>
+
+<script>
+
+const pais=document.getElementById("pais");
+const numero=document.getElementById("numero");
+const preview=document.getElementById("preview");
+const error=document.getElementById("error");
+
+function soloDigitos(valor){
+    return valor.replace(/\D/g,"");
+}
+
+function obtenerNumeroFinal(){
+
+    const codigo=pais.value;
+
+    let num=numero.value.trim();
+
+    if(!num){
+        return "";
+    }
+
+    if(num.startsWith("+")){
+        return soloDigitos(num);
+    }
+
+    num=soloDigitos(num);
+
+    if(num.startsWith(codigo)){
+        num=num.substring(codigo.length);
+    }
+
+    if(num.startsWith("0")){
+        num=num.substring(1);
+    }
+
+    return codigo+num;
+}
+
+function actualizarVistaPrevia(){
+
+    const final=obtenerNumeroFinal();
+
+    preview.textContent=
+        final ? `Se abrirá: +${final}` : "";
+
+    error.textContent="";
+}
+
+function abrirWhatsapp(){
+
+    const final=obtenerNumeroFinal();
+
+    if(final.length<7){
+
+        error.textContent=
+            "Ingrese un número válido.";
+
+        return;
+    }
+
+    window.location.href=
+        `https://wa.me/${final}`;
+}
+
+pais.addEventListener("change",actualizarVistaPrevia);
+
+numero.addEventListener("input",actualizarVistaPrevia);
+
+numero.addEventListener("keypress",e=>{
+    if(e.key==="Enter"){
+        abrirWhatsapp();
+    }
+});
+
+document
+.getElementById("btnWhatsapp")
+.addEventListener("click",abrirWhatsapp);
+
+actualizarVistaPrevia();
+
+if('serviceWorker' in navigator){
+    navigator.serviceWorker.register('service-worker.js');
+}
+
+</script>
+
+</body>
+</html>
