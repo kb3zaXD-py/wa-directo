@@ -1,7 +1,18 @@
 {
+  "id": "/whatsapp-directo",
   "name": "WhatsApp Directo",
   "short_name": "WADirecto",
   "description": "Abrir chats de WhatsApp sin guardar contactos",
+
+  "screenshots": [
+  {
+    "src": "screenshot.jpg",
+    "sizes": "1220x1595",
+    "type": "image/jpeg",
+    "form_factor": "narrow"
+  }
+],
+  
   "start_url": "./index.html",
   "scope": "./",
   "display": "standalone",
