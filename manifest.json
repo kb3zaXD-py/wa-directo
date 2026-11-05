@@ -1,7 +1,7 @@
 {
-  "name": "Escribanía Segovia",
-  "short_name": "Segovia",
-  "description": "Acceso rápido a WhatsApp",
+  "name": "WhatsApp Directo",
+  "short_name": "WADirecto",
+  "description": "Abrir chats de WhatsApp sin guardar contactos",
   "start_url": "./index.html",
   "scope": "./",
   "display": "standalone",
