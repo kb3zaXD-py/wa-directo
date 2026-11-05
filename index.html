@@ -5,7 +5,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 
-<title>Escribanía Segovia</title>
+<title>WhatsApp Directo</title>
 
 <meta name="theme-color" content="#6A1B9A">
 <meta name="description" content="Abrir conversaciones WhatsApp rápidamente">
@@ -113,21 +113,70 @@ button:active{
 
 <div class="container">
 
-<h1>Escribanía Segovia</h1>
+<h1>WhatsApp Directo</h1>
 
 <label>País</label>
 
 <select id="pais">
+
     <option value="595" selected>🇵🇾 Paraguay (+595)</option>
+
     <option value="54">🇦🇷 Argentina (+54)</option>
-    <option value="55">🇧🇷 Brasil (+55)</option>
-    <option value="598">🇺🇾 Uruguay (+598)</option>
     <option value="591">🇧🇴 Bolivia (+591)</option>
+    <option value="55">🇧🇷 Brasil (+55)</option>
     <option value="56">🇨🇱 Chile (+56)</option>
     <option value="57">🇨🇴 Colombia (+57)</option>
+    <option value="593">🇪🇨 Ecuador (+593)</option>
+    <option value="594">🇬🇫 Guayana Francesa (+594)</option>
+    <option value="592">🇬🇾 Guyana (+592)</option>
     <option value="51">🇵🇪 Perú (+51)</option>
+    <option value="597">🇸🇷 Surinam (+597)</option>
+    <option value="598">🇺🇾 Uruguay (+598)</option>
+    <option value="58">🇻🇪 Venezuela (+58)</option>
+
+    <option value="501">🇧🇿 Belice (+501)</option>
+    <option value="506">🇨🇷 Costa Rica (+506)</option>
+    <option value="503">🇸🇻 El Salvador (+503)</option>
+    <option value="502">🇬🇹 Guatemala (+502)</option>
+    <option value="504">🇭🇳 Honduras (+504)</option>
+    <option value="505">🇳🇮 Nicaragua (+505)</option>
+    <option value="507">🇵🇦 Panamá (+507)</option>
+
     <option value="52">🇲🇽 México (+52)</option>
+    <option value="1">🇨🇦 Canadá (+1)</option>
     <option value="1">🇺🇸 Estados Unidos (+1)</option>
+
+    <option value="53">🇨🇺 Cuba (+53)</option>
+    <option value="509">🇭🇹 Haití (+509)</option>
+    <option value="1">🇯🇲 Jamaica (+1)</option>
+    <option value="1">🇧🇸 Bahamas (+1)</option>
+    <option value="1">🇧🇧 Barbados (+1)</option>
+    <option value="1">🇦🇬 Antigua y Barbuda (+1)</option>
+    <option value="1">🇩🇲 Dominica (+1)</option>
+    <option value="1">🇬🇩 Granada (+1)</option>
+    <option value="1">🇰🇳 San Cristóbal y Nieves (+1)</option>
+    <option value="1">🇱🇨 Santa Lucía (+1)</option>
+    <option value="1">🇻🇨 San Vicente y las Granadinas (+1)</option>
+    <option value="1">🇹🇹 Trinidad y Tobago (+1)</option>
+    <option value="1">🇩🇴 República Dominicana (+1)</option>
+    <option value="1">🇵🇷 Puerto Rico (+1)</option>
+
+    <option value="297">🇦🇼 Aruba (+297)</option>
+    <option value="599">🇨🇼 Curazao (+599)</option>
+    <option value="599">🇧🇶 Caribe Neerlandés (+599)</option>
+    <option value="1">🇻🇮 Islas Vírgenes EE.UU. (+1)</option>
+    <option value="1">🇻🇬 Islas Vírgenes Británicas (+1)</option>
+    <option value="590">🇬🇵 Guadalupe (+590)</option>
+    <option value="596">🇲🇶 Martinica (+596)</option>
+    <option value="590">🇧🇱 San Bartolomé (+590)</option>
+    <option value="590">🇲🇫 San Martín (+590)</option>
+    <option value="1">🇰🇾 Islas Caimán (+1)</option>
+    <option value="1">🇹🇨 Islas Turcas y Caicos (+1)</option>
+    <option value="1">🇲🇸 Montserrat (+1)</option>
+    <option value="1">🇦🇮 Anguila (+1)</option>
+    <option value="1">🇧🇲 Bermudas (+1)</option>
+    <option value="299">🇬🇱 Groenlandia (+299)</option>
+
 </select>
 
 <label>Número</label>
@@ -155,7 +204,7 @@ button:active{
 </div>
 
 <div class="footer">
-    Escribanía Segovia
+    By Kb3zaXD-py
 </div>
 
 </div>
@@ -210,18 +259,20 @@ function actualizarVistaPrevia(){
 
 function abrirWhatsapp(){
 
-    const final=obtenerNumeroFinal();
+    const numeroFinal = obtenerNumeroFinal();
 
-    if(final.length<7){
+    error.textContent = "";
 
-        error.textContent=
+    if(numeroFinal.length < 7){
+
+        error.textContent =
             "Ingrese un número válido.";
 
         return;
     }
 
-    window.location.href=
-        `https://wa.me/${final}`;
+    window.location.href =
+        "whatsapp://send?phone=" + numeroFinal;
 }
 
 pais.addEventListener("change",actualizarVistaPrevia);
